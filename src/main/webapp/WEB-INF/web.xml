@@ -4,13 +4,23 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
-        <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>com.wyd.week2.HelloWorldServlet</servlet-class>
+        <servlet-name>anyname</servlet-name>
+        <servlet-class>wangyuandong.HelloWorldServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-name>anyname</servlet-name>
         <url-pattern>/wyd</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>wangyuandong.week3.demo.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>register/registerwww.jsp</welcome-file>
     </welcome-file-list>
