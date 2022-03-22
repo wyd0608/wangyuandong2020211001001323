@@ -1,5 +1,6 @@
 package wangyuandong.week3.demo;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,27 +8,131 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
 
-@WebServlet(name = "RegisterServlet")
+@WebServlet(name = "RegisterServlet",value = "/register")
 public class RegisterServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-    String Username=request.getParameter("Username");
-    String password=request.getParameter("password");
-    String Email=request.getParameter("Email");
-    String Gender=request.getParameter("Gender");
-    String Birthdate=request.getParameter("Birthdate");
+        @Override
+        public void init() throws ServletException {
+            ServletContext application = getServletConfig().getServletContext();
+            String driver = application.getInitParameter("driver");
+            String url = application.getInitParameter("url");
+            String username = application.getInitParameter("username");
+            String password = application.getInitParameter("password");
+
+
+            try {
+                Class.forName(driver);
+                conn = DriverManager.getConnection(url, username, password);
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            /*String ID=request.getParameter("ID");
+    String username=request.getParameter("username");
+    String passwords=request.getParameter("passwords");
+    String emails=request.getParameter("emails");
+    String gender=request.getParameter("gender");
+    String birthdate=request.getParameter("birthdate");*/
 
         PrintWriter writer =response.getWriter();
-        writer.println("<br>Username :"+Username);
+       /* writer.println("<br>Username :"+Username);
         writer.println("<br>password :"+password);
         writer.println("<br>Email :"+Email);
         writer.println("<br>Gender :"+Gender);
         writer.println("<br>Birthdate :"+Birthdate);
-        writer.close();
-    }
+        writer.close();*/
+            writer.print("        <!DOCTYPE html>");
+            writer.print("<html>");
+            writer.print("    <head>");
+            writer.print("        <meta charset='UTF-8'>");
+            writer.print("        <title>Register</title>");
+            writer.print("    </head>");
+            writer.print("    <body>");
+            writer.print("        <h1 align='center'>Register</h1>");
+            writer.print("        <hr>");
+            writer.print("        <table border='3px' align='center' width='60%'>");
+            writer.print("            <tr>");
+            writer.print("                <th>ID</th>");
+            writer.print("                <th>Username</th>");
+            writer.print("                <th>Password</th>");
+            writer.print("                <th>Email</th>");
+            writer.print("                <th>Gender</th>");
+            writer.print("                <th>Birthdate</th>");
+            writer.print("            </tr>");
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            try {
+                /*String sql = "insert into Registers(ID, username, passwords, emails, gender, birthdate) values(?,?,?,?,?,?)";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, ID);
+                ps.setString(2, username);
+                ps.setString(3, passwords);
+                ps.setString(4, emails);
+                ps.setString(5, gender);
+                ps.setString(6, birthdate);
+                int num = ps.executeUpdate();
+                writer.print(num);*/
 
-    }
+                String sql1 = "select * from Registers";
+                ps = conn.prepareStatement(sql1);
+                rs = ps.executeQuery();
+                while (rs.next()){
+                    String ID = rs.getString("ID");
+                    String username = rs.getString("username");
+                    String passwords = rs.getString("passwords");
+                    String emails = rs.getString("emails");
+                    String gender = rs.getString("gender");
+                    String birthdate = rs.getString("birthdate");
+                    writer.print("            <tr>");
+                    writer.print("                <td>"+ ID +"</td>");
+                    writer.print("            <td>"+ username +"</td>");
+                    writer.print("                <td>"+ passwords +"</td>");
+                    writer.print("                <td>"+ emails +"</td>");
+                    writer.print("    <td>"+ gender +"</td>");
+                    writer.print("                <td>"+ birthdate +"</td>");
+                    writer.print("            </tr>");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                if (rs!=null){
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (ps!=null){
+                    try {
+                        ps.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (conn!=null){
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            writer.print("        </table>");
+            writer.print("        <hr>");
+            writer.print("    </body>");
+            writer.print("</html>");
+
+            writer.close();
+        }
 }
+
+

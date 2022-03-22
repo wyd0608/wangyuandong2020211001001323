@@ -33,14 +33,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>wangyuandong.week3.demo.RegisterServlet</servlet-class>
     </servlet>
-   <!-- <servlet>
-        <servlet-name>ConfigDemoServlet</servlet-name>
-        <servlet-class>wangyuandong.week4.ConfigDemoServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ConfigDemoServlet</servlet-name>
-        <url-pattern>/config</url-pattern>
-    </servlet-mapping>-->
+    <!-- <servlet>
+         <servlet-name>ConfigDemoServlet</servlet-name>
+         <servlet-class>wangyuandong.week4.ConfigDemoServlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>ConfigDemoServlet</servlet-name>
+         <url-pattern>/config</url-pattern>
+     </servlet-mapping>-->
     <!--<servlet>
         <servlet-name>JDBCDemoServlet</servlet-name>
         <servlet-class>wangyuandong.week4.JDBCDemoServlet</servlet-class>
