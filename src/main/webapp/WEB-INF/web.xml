@@ -3,6 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:sqlserver://localhost:1433;database=Wangyuandong;encrypt=false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>Login1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>wyd123</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>anyname</servlet-name>
         <servlet-class>wangyuandong.HelloWorldServlet</servlet-class>
@@ -15,6 +33,35 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>wangyuandong.week3.demo.RegisterServlet</servlet-class>
     </servlet>
+   <!-- <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>wangyuandong.week4.ConfigDemoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>-->
+    <!--<servlet>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <servlet-class>wangyuandong.week4.JDBCDemoServlet</servlet-class>
+        <init-param>
+            <param-name>driver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:sqlserver://localhost:1433;database=Wangyuandong;encrypt=false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>Login1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>wyd123</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>-->
 
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -24,4 +71,8 @@
     <welcome-file-list>
         <welcome-file>register/registerwww.jsp</welcome-file>
     </welcome-file-list>
+    <!--<servlet-mapping>
+        <servlet-name>JDBCDemoServlet</servlet-name>
+        <url-pattern>/jdbc</url-pattern>
+    </servlet-mapping>-->
 </web-app>
