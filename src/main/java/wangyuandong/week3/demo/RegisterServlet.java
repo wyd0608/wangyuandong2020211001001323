@@ -36,20 +36,21 @@ public class RegisterServlet extends HttpServlet {
 
         @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            /*String ID=request.getParameter("ID");
-    String username=request.getParameter("username");
-    String passwords=request.getParameter("passwords");
-    String emails=request.getParameter("emails");
-    String gender=request.getParameter("gender");
-    String birthdate=request.getParameter("birthdate");*/
+            String ID=request.getParameter("ID");
+            String username=request.getParameter("username");
+            String passwords=request.getParameter("passwords");
+            String emails=request.getParameter("emails");
+            String gender=request.getParameter("gender");
+            String birthdate=request.getParameter("birthdate");
 
         PrintWriter writer =response.getWriter();
-       /* writer.println("<br>Username :"+Username);
-        writer.println("<br>password :"+password);
-        writer.println("<br>Email :"+Email);
-        writer.println("<br>Gender :"+Gender);
-        writer.println("<br>Birthdate :"+Birthdate);
-        writer.close();*/
+//            writer.println("<br>ID :"+ID);
+//            writer.println("<br>username :"+username);
+//            writer.println("<br>passwords :"+passwords);
+//            writer.println("<br>emails :"+emails);
+//            writer.println("<br>gender :"+gender);
+//            writer.println("<br>birthdate :"+birthdate);
+//            writer.close();
             writer.print("        <!DOCTYPE html>");
             writer.print("<html>");
             writer.print("    <head>");
@@ -62,42 +63,41 @@ public class RegisterServlet extends HttpServlet {
             writer.print("        <table border='3px' align='center' width='60%'>");
             writer.print("            <tr>");
             writer.print("                <th>ID</th>");
-            writer.print("                <th>Username</th>");
-            writer.print("                <th>Password</th>");
-            writer.print("                <th>Email</th>");
-            writer.print("                <th>Gender</th>");
-            writer.print("                <th>Birthdate</th>");
+            writer.print("                <th>username</th>");
+            writer.print("                <th>passwords</th>");
+            writer.print("                <th>email</th>");
+            writer.print("                <th>gender</th>");
+            writer.print("                <th>birthdate</th>");
             writer.print("            </tr>");
 
             try {
-                /*String sql = "insert into Registers(ID, username, passwords, emails, gender, birthdate) values(?,?,?,?,?,?)";
+                String sql = "insert into Registers(ID, username, passwords, emails, gender, birthdate) values(?,?,?,?,?,?)";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, ID);
+                ps.setString(1,"23");
                 ps.setString(2, username);
                 ps.setString(3, passwords);
                 ps.setString(4, emails);
                 ps.setString(5, gender);
                 ps.setString(6, birthdate);
-                int num = ps.executeUpdate();
-                writer.print(num);*/
+                ps.executeUpdate();
 
                 String sql1 = "select * from Registers";
                 ps = conn.prepareStatement(sql1);
                 rs = ps.executeQuery();
                 while (rs.next()){
-                    String ID = rs.getString("ID");
-                    String username = rs.getString("username");
-                    String passwords = rs.getString("passwords");
-                    String emails = rs.getString("emails");
-                    String gender = rs.getString("gender");
-                    String birthdate = rs.getString("birthdate");
+                    String ID1 = rs.getString("ID");
+                    String username1 = rs.getString("username");
+                    String passwords1 = rs.getString("passwords");
+                    String emails1 = rs.getString("emails");
+                    String gender1 = rs.getString("gender");
+                    String birthdate1 = rs.getString("birthdate");
                     writer.print("            <tr>");
-                    writer.print("                <td>"+ ID +"</td>");
-                    writer.print("            <td>"+ username +"</td>");
-                    writer.print("                <td>"+ passwords +"</td>");
-                    writer.print("                <td>"+ emails +"</td>");
-                    writer.print("    <td>"+ gender +"</td>");
-                    writer.print("                <td>"+ birthdate +"</td>");
+                    writer.print("                <td>"+ ID1 +"</td>");
+                    writer.print("            <td>"+ username1 +"</td>");
+                    writer.print("                <td>"+ passwords1 +"</td>");
+                    writer.print("                <td>"+ emails1 +"</td>");
+                    writer.print("    <td>"+ gender1 +"</td>");
+                    writer.print("                <td>"+ birthdate1 +"</td>");
                     writer.print("            </tr>");
                 }
             } catch (SQLException e) {

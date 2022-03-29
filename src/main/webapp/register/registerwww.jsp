@@ -44,24 +44,15 @@
             box-sizing: border-box;
         }
         body {
-            /*弹性布局 让页面元素垂直+水平居中*/
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /*让页面始终占浏览器可视区域总高度*/
+
             height: 100vh;
-            /*背景渐变色*/
-            background: linear-gradient(white, white);
+            background-color: white;
 
         }
         .login{
             /*弹性布局 让子元素称为弹性项目*/
             display: flex;
-            /*让弹性项目垂直排列  原理是改变弹性盒子的主轴方向
-            父元素就是弹性盒子  现在改变后的主轴方向是向下了*/
             flex-direction: column;
-            /*让弹性项目在交叉轴方向水平居中  现在主轴的方向是向下
-            交叉轴的方向是与主轴垂直 交叉轴的方向是向右*/
             align-items: center;
             width: 400px;
             padding: 40px;
@@ -74,10 +65,12 @@
             color: #111010;
             margin-bottom: 30px;
         }
-        .login .login_box {
+        .login {
             /*相对定位*/
             position: relative;
-            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
         .login .login_box input{
             /*清除input框自带的边框和轮廓*/
@@ -99,10 +92,6 @@
             left: 0;
             padding: 10px 0;
             color: #0e0c0c;
-            /*这个属性的默认值是auto 默认是这个元素可以被点击
-            但是如果我们写了none  就是这个元素不能被点击，就好像它可见但是不能用
-            可望而不可及*/
-            /*这个就是两者的区别*/
             pointer-events: none;
             /*加个过度*/
             transition: all 0.5s;
@@ -133,21 +122,23 @@
     </style>
 </head>
 <body>
+<%@include file="../header.jsp"%>
 <div class="login">
 <form action="${pageContext.request.contextPath}/register" align="center" name="form1" method="post" onsubmit="return on_submit()">
     <h2>New User Registration!</h2><br>
     <div class="login_box">
-    <input type="text"  name="Username"id="U" placeholder="Username" style="background-color: #ffffff;size:500px"><br>
-    <input type="text" name="password" id="P" placeholder="password" style="background-color: #ffffff;size:500px"><br>
-    <input type="text" name="Email" id="E" placeholder=Email style="background-color: #fcfcfc;size:500px"><br>
-        <input type="date" name="Birthdate" placeholder="Date of birth(years-mouths-days)" style="background-color: #f8f8f8;size:500px"><br>
+    <input type="text"  name="username"id="U" placeholder="Username" style="background-color: #ffffff;size:500px"><br>
+    <input type="text" name="passwords" id="P" placeholder="password" style="background-color: #ffffff;size:500px"><br>
+    <input type="text" name="emails" id="E" placeholder=Email style="background-color: #fcfcfc;size:500px"><br>
+        <input type="date" name="birthdate" placeholder="Date of birth(years-mouths-days)" style="background-color: #f8f8f8;size:500px"><br>
     </div>
-    <strong>Gender</strong> <input type="radio" name="Gender" value="Male">Male
-    <input type="radio" name="Gender" value="Female">Female<br>
+    <strong>Gender</strong> <input type="radio" name="gender" value="Male">Male
+    <input type="radio" name="gender" value="Female">Female<br>
     <div class="login_box">
     <input type="submit" value="Register" style="background-color: #fcfbfa;size: 200px">
     </div>
 </form>
+    <%@include file="../footer.jsp"%>
     </div>
 </body>
 </html>
