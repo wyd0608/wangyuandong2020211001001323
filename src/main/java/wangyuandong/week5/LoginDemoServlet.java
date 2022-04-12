@@ -1,5 +1,8 @@
 package wangyuandong.week5;
 
+import wangyuandong.Dao.UserDao;
+import wangyuandong.model.User;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,11 +37,25 @@ public class LoginDemoServlet extends HttpServlet {
         conn=(Connection) getServletContext().getAttribute("conn");
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        PrintWriter writer =response.getWriter();
         String username = request.getParameter("username");
         String passwords = request.getParameter("passwords");
-        PrintWriter writer =response.getWriter();
-        String sql="select * from Registers where username=? and passwords=?";
+
+        UserDao userDao=new UserDao();
+        try {
+           User user=userDao.findByUsernamePassword(conn,username,passwords);
+           if(user!=null){
+
+               request.setAttribute("user",user);
+               request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+           }else{
+               request.setAttribute("message","Username or Password Error!!!");
+               request.getRequestDispatcher("WEB-INF/views/Loing.jsp").forward(request,response);
+           }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        /*String sql="select * from Registers where username=? and passwords=?";
         try {
             String a=null;
             String b=null;
@@ -53,7 +70,7 @@ public class LoginDemoServlet extends HttpServlet {
             while(rs.next()) {
                  a = rs.getString("username");
                  b = rs.getString("passwords");
-                c = rs.getString("ID");
+                c = rs.getInt("ID");
                 d = rs.getString("emails");
                 e = rs.getString("gender");
                 f = rs.getString("birthdate");
@@ -77,7 +94,7 @@ public class LoginDemoServlet extends HttpServlet {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        }*/
 
 
     }
@@ -85,6 +102,7 @@ public class LoginDemoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.getRequestDispatcher("WEB-INF/views/Loing.jsp").forward(request,response);
         doPost(request,response);
     }
 }
