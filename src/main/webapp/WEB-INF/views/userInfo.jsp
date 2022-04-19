@@ -9,7 +9,7 @@
 <%@include file="header.jsp"%>
 <h1>User InFo</h1>
 <%
-    User user=(User)request.getAttribute("user");
+    User user=(User)session.getAttribute("user");
 %>
 <table>
     <tr>
@@ -24,6 +24,6 @@
         <td>birthdate:</td><td><%=user.getBirthdate()%></td>
     </tr>
 </table>
-
+<a href="updateUser">Update</a>
 
 <%@include file="footer.jsp"%>
