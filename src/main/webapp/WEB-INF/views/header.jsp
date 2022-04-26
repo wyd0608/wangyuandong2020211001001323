@@ -54,6 +54,6 @@
              }
          %>
          <br><a href="#">My Cart</a><br/>
-         <a href="week2/register.jsp">Register Here</a>
+         <a href="registerwww.jsp">Register Here</a>
      </td></tr>
  </table>
