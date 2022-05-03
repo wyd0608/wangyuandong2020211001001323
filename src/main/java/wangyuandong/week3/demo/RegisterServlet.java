@@ -105,7 +105,7 @@ public class RegisterServlet extends HttpServlet {
 ////                    writer.print("                <td>"+ birthdate1 +"</td>");
 ////                    writer.print("            </tr>");
 //                }
-                response.sendRedirect("Loing.jsp");
+                response.sendRedirect("login.jsp");
             } catch (SQLException e) {
                 e.printStackTrace();
             }finally {

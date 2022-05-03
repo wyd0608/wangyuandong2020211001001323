@@ -17,7 +17,7 @@ public class LogoutServlet extends HttpServlet {
 
         request.getSession(false).invalidate();
         request.setAttribute("message","You have successfully logged out!");
-        request.getRequestDispatcher("WEB-INF/views/Loing.jsp").forward(request,response);
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request,response);
 
     }
 }
