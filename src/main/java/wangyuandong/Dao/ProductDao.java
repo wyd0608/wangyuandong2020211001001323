@@ -3,10 +3,7 @@ package wangyuandong.Dao;
 import wangyuandong.model.Product;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,5 +171,19 @@ public class ProductDao implements  IProductDao{
         pt.setInt(1, productId);
         ResultSet rs = pt.executeQuery();
         return rs.getBinaryStream("picture");
+    }
+
+    public byte[] getPictureById(Integer productId, Connection con) throws SQLException {
+        byte[] imgByte = null;
+        String sql = "select picture from product where productId=?";
+        PreparedStatement pt = con.prepareStatement(sql);
+        pt.setInt(1, productId);
+        ResultSet rs = pt.executeQuery();
+        while (rs.next()){
+            Blob blob = rs.getBlob("picture");
+            imgByte = blob.getBytes(1, (int)blob.length());
+        }
+
+        return imgByte;
     }
 }

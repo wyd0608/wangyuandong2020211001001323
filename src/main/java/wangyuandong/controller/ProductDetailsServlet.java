@@ -1,6 +1,7 @@
 package wangyuandong.controller;
 
 import wangyuandong.Dao.ProductDao;
+import wangyuandong.model.Category;
 import wangyuandong.model.Product;
 
 import javax.servlet.ServletException;
@@ -13,30 +14,32 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-
-@WebServlet(name = "ProductListServlet", value = "/admin/productList")
-public class ProductListServlet extends HttpServlet {
-    Connection con = null;
+@WebServlet("/productDetails")
+public class ProductDetailsServlet extends HttpServlet {
+    private Connection con;
 
     @Override
     public void init() throws ServletException {
-        super.init();
         con = (Connection) getServletContext().getAttribute("conn");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int id = request.getParameter("id")!=null?Integer.parseInt(request.getParameter("id")):0;
         ProductDao productDao = new ProductDao();
-        List<Product> productList = null;
-        try {
-            productList = productDao.findAll(con);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        if (id == 0){
+            return; //error
         }
-        request.setAttribute("productList", productList);
+        List<Category> categoryList = Category.findAllCategory(con);
+        request.setAttribute("categoryList", categoryList);
 
-        String path = "/WEB-INF/views/admin/productList.jsp";
+        try {
+            Product product = productDao.findById(id, con);
+            request.setAttribute("p", product);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String path = "/WEB-INF/views/productDetails.jsp";
         request.getRequestDispatcher(path).forward(request, response);
     }
 
