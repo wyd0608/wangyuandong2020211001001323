@@ -101,4 +101,14 @@
         <servlet-name>LifeCycleServlet</servlet-name>
         <url-pattern>/life</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>Wangyuandong</filter-name>
+        <filter-class>wangyuandong.LAB2.WangyuandongFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Wangyuandong</filter-name>
+        <url-pattern>/LAB2/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
