@@ -105,7 +105,8 @@ public class RegisterServlet extends HttpServlet {
 ////                    writer.print("                <td>"+ birthdate1 +"</td>");
 ////                    writer.print("            </tr>");
 //                }
-                response.sendRedirect("login.jsp");
+                request.setAttribute("message", "User Registered Successfull!");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
             } catch (SQLException e) {
                 e.printStackTrace();
             }finally {

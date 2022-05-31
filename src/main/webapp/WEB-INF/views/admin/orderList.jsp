@@ -91,7 +91,7 @@
 							 %>
 						 <td><%=customerName %></td>
 						<td>
-						<p>first Name last Name<p> 
+						<p>first Name last Name<p>
 						<p> address1</p>
 						<p>address2</p>
 						<p>city,state,country-postalCode</p><p>phone</p></td>
